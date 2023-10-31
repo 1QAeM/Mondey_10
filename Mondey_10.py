@@ -1,4 +1,4 @@
-tt = 1.000.000
+tt = 9000000#$
 print("Hello World!!!")
 print("Hello GitHub")
 #Hello Baby)
