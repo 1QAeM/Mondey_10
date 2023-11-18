@@ -1,7 +1,2 @@
-tt = 9000000#$
-print("Hello World!!!")
-print("Hello GitHub")
-#Hello Baby)
-#OK kidoki
-import selenium
-from selenium.common.by import By
+#It was usual Monday...until
+# what happend?....add your line
