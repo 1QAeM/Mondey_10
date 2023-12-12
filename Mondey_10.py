@@ -10,4 +10,4 @@ M = 10 # why not)
 # even when i creating lists..I feel like I'm part of the programming community!)))Cool
 # next day...or better day= day + 1... day += 1
 # little step for human but big step for humanity
-# 
+# sometimes it...not easy...continue
