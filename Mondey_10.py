@@ -1,6 +1,6 @@
 #It was usual Monday...until
 # what happend?....add your line
-M = 10 # why not)
+M = 7 # why not)
 # Let it be Let it be Let it be Letit Be...
 #next day of search and research....sadness...
 # SymbList = ['$','!','&','@','"',';)',':(','#',':/','%','€','£','¥']]
@@ -11,3 +11,5 @@ M = 10 # why not)
 # next day...or better day= day + 1... day += 1
 # little step for human but big step for humanity
 # sometimes it...not easy...continue
+print("M Between 0 and 10") if M > 0 and M < 10 else print("Hmmmmm....")
+# i love it)!
