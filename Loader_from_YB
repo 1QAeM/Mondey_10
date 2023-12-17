@@ -1,0 +1,91 @@
+import tkinter as tk
+from tkinter import *
+from pytube import YouTube
+from tkinter import messagebox, filedialog
+# Defining CreateWidgets() function
+# to create necessary tkinter widgets
+def Widgets():
+    head_label = Label(root, text="Crazy_Mashinen_Var_II",padx=15,pady=15,font="SegoeUI 14",bg="black",fg="red")
+    head_label.grid(row=1,column=1,pady=10,padx=13,columnspan=1)
+
+    link_label = Label(root,text="Input_link :>>>",fg="red",bg="black",pady=5,padx=5)
+    link_label.grid(row=2,column=0,pady=5,padx=5)
+
+    root.linkText = Entry(root,width=27,textvariable=video_Link,font="Arial 14")
+    root.linkText.grid(row=2,column=1,pady=5, padx=5,columnspan=1)
+
+    destination_label = Label(root,text="Destination :>>",fg="red",bg="black",pady=5,padx=9)
+    destination_label.grid(row=3,column=0,pady=5,padx=5)
+
+    root.destinationText = Entry(root,width=27,textvariable=download_Path,font="Arial 14")
+    root.destinationText.grid(row=3,column=1,pady=5,padx=5)
+
+    browse_B = Button(root,font="Arial 7",text="Where_to_drop",fg="red",bg="black",command=Browse,width=10,relief=GROOVE)
+    browse_B.grid(row=3,column=2,pady=3,padx=3)
+# video
+    Download_B = Button(root,text=">>>Download Audio<<<",command=Download_video,width=13,fg="red",bg="black",pady=7,padx=27,
+                        relief=GROOVE,font="Georgia, 11")
+    Download_B.place(x=290,y=170)
+# audio mp3
+    Download_B = Button(root, text=">>>Download Video<<<", command=Download_audio, width=13, fg="red", bg="black",
+                        pady=7, padx=27,relief=GROOVE, font="Georgia, 11")
+    Download_B.place(x=40,y=170)
+
+
+# Defining Browse() to select a
+# destination folder to save the video
+def Browse():
+    # Presenting user with a pop-up for
+    # directory selection. initialdir
+    # argument is optional Retrieving the
+    # user-input destination directory and
+    # storing it in downloadDirectory
+    DD = filedialog.askdirectory(
+        initialdir="YOUR DIRECTORY PATH", title="Save Video")
+    # Displaying the directory in the directory
+    # textbox
+    download_Path.set(DD)
+# Defining Download() to download the video
+def Download_audio():
+    # Creating object of YouTube()
+    getVideo = YouTube(video_Link.get())
+    # Getting all the available streams of the
+    # youtube video and selecting the first
+    # from the
+    videoStream = getVideo.streams.get_highest_resolution()
+    # Downloading the video to destination
+    # directory
+    videoStream.download(download_Path.get())
+    # # Displaying the message
+    messagebox.showinfo("Audio_in_Mp3","DOwNloadEd and saved")
+
+def Download_video():
+    # Creating object of YouTube()
+    getVideo = YouTube(video_Link.get())
+    # Getting all the available streams of the
+    # youtube video and selecting the first
+    # from the
+    videoStream = getVideo.streams.get_audio_only()
+    # Downloading the video to destination
+    # directory
+    videoStream.download(download_Path.get())
+    # # Displaying the message
+    messagebox.showinfo("Video_in_Mp4","DOwNloadEd and saved")
+
+# Creating object of tk class
+root = tk.Tk()
+# Setting the title, background color
+# and size of the tkinter window and
+# disabling the resizing property
+root.geometry("520x280")
+root.resizable(False, False)
+root.title("Crazy_Mashinen_ver_Nahvas")
+root.config(background="black")
+# Creating the tkinter Variables
+video_Link = StringVar()
+download_Path = StringVar()
+# Calling the Widgets() function
+Widgets()
+# Defining infinite loop to run
+# application
+root.mainloop()
