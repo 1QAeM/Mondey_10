@@ -18,4 +18,23 @@ print("M Between 0 and 10") if M > 0 and M < 10 else print("Hmmmmm....")
 # Helllloooo helllloooo
 # project aquarium started...and moving forward
 # need sprites for fishes and weeds....
-# 
+# looks ne ploho...but steel needs sprites)))
+# where are super duper spritemaker AI? when it need)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
