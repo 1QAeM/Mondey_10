@@ -20,7 +20,11 @@ print("M Between 0 and 10") if M > 0 and M < 10 else print("Hmmmmm....")
 # need sprites for fishes and weeds....
 # looks ne ploho...but steel needs sprites)))
 # where are super duper spritemaker AI? when it need)))
-
+if a=0 and b=0:
+    c=0
+elif d=0 or e=0:
+    print("Hello World!")
+    
 
 
 
