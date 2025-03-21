@@ -1,0 +1,90 @@
+Для создания голосового помощника на Python с использованием библиотеки Vosk для распознавания речи и выполнения команд на Windows 10, выполните следующие шаги:
+
+---
+
+### **1. Установите необходимые библиотеки**
+```bash
+pip install vosk pyttsx3
+pip install pyaudio  # Если возникают проблемы, используйте: pipwin install pyaudio
+```
+
+Скачайте модель Vosk для русского языка (или другого нужного языка):
+- [vosk-model-small-ru-0.22.zip](https://alphacephei.com/vosk/models/vosk-model-small-ru-0.22.zip)
+
+Распакуйте модель в удобное место.
+
+---
+
+### **2. Код голосового помощника**
+```python
+import os
+import pyttsx3
+from vosk import Model, KaldiRecognizer
+import pyaudio
+
+# Инициализация синтеза речи
+engine = pyttsx3.init()
+
+def speak(text):
+    engine.say(text)
+    engine.runAndWait()
+
+# Загрузка модели Vosk
+model_path = "путь_к_распакованной_модели"
+if not os.path.exists(model_path):
+    print("Модель не найдена!")
+    exit(1)
+
+model = Model(model_path)
+recognizer = KaldiRecognizer(model, 16000)
+
+# Инициализация микрофона
+mic = pyaudio.PyAudio()
+stream = mic.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True, frames_per_buffer=8192)
+stream.start_stream()
+
+speak("Голосовой помощник запущен. Говорите вашу команду.")
+
+while True:
+    data = stream.read(4096, exception_on_overflow=False)
+    if recognizer.AcceptWaveform(data):
+        command = recognizer.Result()
+        command_text = eval(command)["text"]
+        print(f"Вы сказали: {command_text}")
+
+        # Пример выполнения команды
+        if "открой браузер" in command_text:
+            speak("Открываю браузер.")
+            os.system("start chrome")
+        elif "выход" in command_text:
+            speak("Завершаю работу.")
+            break
+        else:
+            speak("Команда не распознана.")
+```
+
+---
+
+### **3. Как это работает**
+1. **Распознавание речи**: Библиотека Vosk преобразует голос в текст.
+2. **Синтез речи**: Pyttsx3 озвучивает ответы.
+3. **Выполнение команд**: Через `os.system` можно запускать программы или выполнять команды.
+
+---
+
+### **4. Расширение функциональности**
+- Добавьте больше команд в блок `if-elif`.
+- Для сложных задач используйте библиотеки NLP (например, OpenAI API).
+- Для запуска файлов создавайте ярлыки и связывайте их с командами.
+
+Теперь ваш голосовой помощник готов!
+
+Sources
+[1] простой голосовой помощник в консоли на Python для Windows 10. https://github.com/Rimtex/Voice_Commands
+[2] Easy Text-to-Speech in Windows 10 Using PyWin32 https://www.codesofinterest.com/2020/05/text-to-speech-windows-10-pywin32.html
+[3] Создание голосового ассистента на Python, часть 1 - Habr https://habr.com/ru/articles/515128/
+[4] Speech-to-Text Conversion Using Python - TechChannel https://techchannel.com/python/speech-to-text-python/
+[5] Как создать своего голосового ассистента с ИИ на Python! - VC.ru https://vc.ru/marketing/1848288-poshagovyi-gaid-kak-sozdat-svoego-golosovogo-assistenta-s-ii-na-python
+[6] Using Windows Speech Recognition with Python? - Stack Overflow https://stackoverflow.com/questions/72921247/using-windows-speech-recognition-with-python
+[7] Пишем голосового ассистента на Python / Хабр - Habr https://habr.com/ru/articles/529590/
+[8] Speech to Text Python Code using Speech Recognition ... - YouTube https://www.youtube.com/watch?v=eykWtp-Bt8A
